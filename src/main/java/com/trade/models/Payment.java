@@ -1,4 +1,4 @@
-package com.trade.reportingservice.payments;
+package com.trade.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

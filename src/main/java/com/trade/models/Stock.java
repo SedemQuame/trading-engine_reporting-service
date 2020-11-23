@@ -1,4 +1,4 @@
-package com.trade.reportingservice.stocks;
+package com.trade.models;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

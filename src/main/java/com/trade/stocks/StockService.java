@@ -1,5 +1,6 @@
-package com.trade.reportingservice.stocks;
+package com.trade.stocks;
 
+import com.trade.models.Stock;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

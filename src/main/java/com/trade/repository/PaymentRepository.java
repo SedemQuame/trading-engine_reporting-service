@@ -1,5 +1,6 @@
-package com.trade.reportingservice.payments;
+package com.trade.repository;
 
+import com.trade.models.Payment;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

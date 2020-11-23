@@ -1,7 +1,7 @@
-package com.trade.reportingservice;
+package com.trade;
 
-import com.trade.reportingservice.orders.Order;
-import com.trade.reportingservice.orders.OrderRepository;
+import com.trade.models.Order;
+import com.trade.repository.OrderRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

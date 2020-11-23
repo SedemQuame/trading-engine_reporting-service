@@ -1,5 +1,7 @@
-package com.trade.reportingservice.orders;
+package com.trade.services;
 
+import com.trade.models.Order;
+import com.trade.repository.OrderRepository;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -12,7 +14,11 @@ public class OrderService {
         this.repository = repository;
     }
 
-//    test orders route
+    public static void updateOrder() {
+
+    }
+
+    //    test orders route
     @GetMapping("/orders")
     public String root(){
         return "Order Routing Service";
@@ -44,20 +50,22 @@ public class OrderService {
     }
 
 //    Updating orders in database by id
-//    @PutMapping("/order/update/{orderId}")
-//    public Mono<Void> updateOrder(@PathVariable String orderId, @RequestBody Order update){
-//        Mono<Order> updateDocument = repository.findById(orderId);
-//        updateDocument.map(order -> {
-//            order.setUserId(update.getUserId());
-//            order.setUnitPrice(update.getUnitPrice());
-//            order.setTickerSymbol(update.getTickerSymbol());
-//            order.setStatusId(update.getStatusId());
-//            order.setQuantity(update.getQuantity());
-//            order.setTransactionId(update.getTransactionId());
-//            order.setDateCreated(update.getDateCreated());
-//            order.setDateModified(update.getDateModified());
-//            repository.save(order);
-//        });
-//    }
+    @PutMapping("/order/update/{orderId}")
+    public Mono<Order> updateOrder(@PathVariable String orderId, @RequestBody Order update){
+        Mono<Order> updateDocument = repository.findById(orderId);
+        updateDocument.map(order -> {
+            order.setUserId(update.getUserId());
+            order.setUnitPrice(update.getUnitPrice());
+            order.setTickerSymbol(update.getTickerSymbol());
+            order.setStatusId(update.getStatusId());
+            order.setQuantity(update.getQuantity());
+            order.setTransactionId(update.getTransactionId());
+            order.setDateCreated(update.getDateCreated());
+            order.setDateModified(update.getDateModified());
+            return repository.save(order);
+        });
+
+        return updateDocument;
+    }
 
 }

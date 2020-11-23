@@ -1,5 +1,7 @@
-package com.trade.reportingservice.portfolios;
+package com.trade.services;
 
+import com.trade.models.Portfolio;
+import com.trade.repository.PortfolioRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;

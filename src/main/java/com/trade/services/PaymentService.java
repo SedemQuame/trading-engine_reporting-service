@@ -1,5 +1,7 @@
-package com.trade.reportingservice.payments;
+package com.trade.services;
 
+import com.trade.models.Payment;
+import com.trade.repository.PaymentRepository;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
