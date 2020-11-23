@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ValidatedOrder implements Serializable {
     private static final long serialVersionUID = 2228145111069333864L;
-
+    private String id;
     private OrderItem orderItem;
     private String status;
     private String userId;
@@ -30,6 +30,14 @@ public class ValidatedOrder implements Serializable {
                 ", status='" + status + '\'' +
                 ", userId='" + userId + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public OrderItem getOrderItem() {
+        return orderItem;
     }
 }
 
