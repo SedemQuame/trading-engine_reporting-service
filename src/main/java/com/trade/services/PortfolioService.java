@@ -31,15 +31,16 @@ public class PortfolioService {
 
     @PostMapping("/portfolio/create")
     @CrossOrigin
-    Mono<CreationResponse> createPortfolio(@RequestBody Portfolio newPortfolio){
+    Mono<Void> createPortfolio(@RequestBody Portfolio newPortfolio){
         Mono<Portfolio> saveToDatabase = repository.save(newPortfolio);
-        Mono.when(saveToDatabase);
-        return Mono.just((new CreationResponse("success", "Created portfolio success")));
+        return Mono.when(saveToDatabase).doOnNext(response -> Mono.just((new CreationResponse("success", "Created portfolio success"))));
     }
-//    Mono<Void> createPortfolio(@RequestBody Portfolio newPortfolio){
-//        Mono<Portfolio> saveToDatabase = repository.save(newPortfolio);
-//        return Mono.when(saveToDatabase);
-//    }
+
+    @GetMapping("/portfolio/getByUserId/{userId}")
+    @CrossOrigin
+    Flux<Portfolio> getAllPortfolioByUserId(@PathVariable String userId){
+        return repository.findAllByUserIdLike(userId);
+    }
 
 //    deleting portfolio in database by id
     @DeleteMapping("/portfolio/delete/{portfolioId}")
