@@ -17,6 +17,8 @@ import java.util.List;
 public class ReportingService {
     private static final int PORT = 8090;
     private final static String ORDER_TO_REPORTING_SERVICE_CHANNEL = "C2";
+    private static final String LOCAL_URL = "http://localhost:8080/";
+    private static final String HEROKU_URL = "https://trade-order-validator.herokuapp.com/";
 
     public static void main(String[] args) {
 //		Instance for running the app
@@ -37,15 +39,17 @@ public class ReportingService {
                     assert validatedOrders != null;
                     validatedOrders.forEach(updatedOrder -> {
                         String orderId = updatedOrder.getOrderId();
-
                         // TODO: 11/23/20 pass validated items from the order validation service here.
-
                         RestTemplate restTemplate = new RestTemplate();
-                        String endPoint = "http://localhost:8080/order/update/" + orderId;
+                        String endPoint = "";
+                        if (System.getenv("REDIS_URL") != null) {
+                            endPoint += HEROKU_URL;
+                        }else {
+                            endPoint += LOCAL_URL;
+                        }
+                        endPoint += "order/update/" + orderId;
                         restTemplate.put(endPoint, updatedOrder, Order.class);
                     });
-
-
                 }
 
                 @Override

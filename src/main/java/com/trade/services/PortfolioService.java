@@ -40,6 +40,4 @@ public class PortfolioService {
     public Mono<Void> deletePortfolioRecord(@PathVariable String portfolioId){
         return Mono.when(repository.deleteById(portfolioId));
     }
-
-//    add an update to utility for portfolios
 }
