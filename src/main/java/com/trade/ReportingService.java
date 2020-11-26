@@ -43,12 +43,14 @@ public class ReportingService {
                         RestTemplate restTemplate = new RestTemplate();
                         String endPoint = "";
                         if (System.getenv("REDIS_URL") != null) {
-                            endPoint += HEROKU_URL;
+                            endPoint += HEROKU_URL + "order/update/" + orderId;
                         }else {
-                            endPoint += LOCAL_URL;
+                            endPoint += LOCAL_URL + "order/update/" + orderId;
+//                            restTemplate.put(endPoint, updatedOrder, Order.class);
                         }
-                        endPoint += "order/update/" + orderId;
+                        System.out.println("End Point: " + endPoint);
                         restTemplate.put(endPoint, updatedOrder, Order.class);
+
                     });
                 }
 
