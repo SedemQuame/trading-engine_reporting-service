@@ -9,6 +9,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
+@CrossOrigin
 public class OrderService {
     @Autowired
     private OrderRepository repository;
@@ -55,8 +56,8 @@ public class OrderService {
 
     //    Updating orders in database by id
     @PutMapping("/order/update/{orderId}")
-    @CrossOrigin
     @Transactional
+    @CrossOrigin
     Mono<Order> updateOrder(@PathVariable String orderId, @RequestBody Order update) {
         return this.repository.findById(orderId)
                 .flatMap(order -> {
