@@ -39,6 +39,13 @@ public class OrderService {
         return repository.findById(orderId);
     }
 
+    //    filter orders in database by id
+    @GetMapping("/get/order/{userId}")
+    @CrossOrigin
+    public Flux<Order> orderByUserId(@PathVariable String userId) {
+        return repository.findAllByUserIdEquals(userId);
+    }
+
     //    creating orders
     @PostMapping("/order/create")
     @CrossOrigin
