@@ -6,30 +6,36 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.io.Serializable;
+
 @Document
-public @Data class Order {
+public @Data class Order implements Serializable {
+    private static final long serialVersionUID = 2228145111069333864L;
     @Id
     private @Getter @Setter String orderId;
     private @Getter @Setter String userId;
-    private @Getter @Setter int unitPrice;
-    private @Getter @Setter String tickerSymbol;
-    private @Getter @Setter int statusId;
-    private @Getter @Setter int quantity;
-    private @Getter @Setter int transactionId;
+    private @Getter @Setter String ticker;
+    private @Getter @Setter String status;
     private @Getter @Setter String dateCreated;
     private @Getter @Setter String dateModified;
-    private @Getter @Setter int orderTypeId;
+    private @Getter @Setter String side;
+    private @Getter @Setter double price;
+    private @Getter @Setter int quantity;
 
-    public Order(String userId, int unitPrice, String tickerSymbol, int statusId, int quantity, int transactionId, String dateCreated, String dateModified, int orderTypeId) {
+    public Order(String orderId, String userId, String ticker, String status, String dateCreated, String dateModified, String side, double price, int quantity) {
+        this.orderId = orderId;
         this.userId = userId;
-        this.unitPrice = unitPrice;
-        this.tickerSymbol = tickerSymbol;
-        this.statusId = statusId;
-        this.quantity = quantity;
-        this.transactionId = transactionId;
+        this.ticker = ticker;
+        this.status = status;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
-        this.orderTypeId = orderTypeId;
+        this.side = side;
+        this.price = price;
+        this.quantity = quantity;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
     public String getOrderId() {
@@ -48,44 +54,20 @@ public @Data class Order {
         this.userId = userId;
     }
 
-    public int getUnitPrice() {
-        return unitPrice;
+    public String getTicker() {
+        return ticker;
     }
 
-    public void setUnitPrice(int unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setTicker(String ticker) {
+        this.ticker = ticker;
     }
 
-    public String getTickerSymbol() {
-        return tickerSymbol;
+    public String getStatus() {
+        return status;
     }
 
-    public void setTickerSymbol(String tickerSymbol) {
-        this.tickerSymbol = tickerSymbol;
-    }
-
-    public int getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(int statusId) {
-        this.statusId = statusId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getDateCreated() {
@@ -104,12 +86,43 @@ public @Data class Order {
         this.dateModified = dateModified;
     }
 
-    public int getOrderTypeId() {
-        return orderTypeId;
+    public String getSide() {
+        return side;
     }
 
-    public void setOrderTypeId(int orderTypeId) {
-        this.orderTypeId = orderTypeId;
+    public void setSide(String side) {
+        this.side = side;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId='" + orderId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", ticker='" + ticker + '\'' +
+                ", status='" + status + '\'' +
+                ", dateCreated='" + dateCreated + '\'' +
+                ", dateModified='" + dateModified + '\'' +
+                ", side='" + side + '\'' +
+                ", price=" + price +
+                ", quantity=" + quantity +
+                '}';
     }
 }
 

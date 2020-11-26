@@ -15,16 +15,19 @@ public class PaymentService {
     }
 
     @GetMapping("/payment")
+    @CrossOrigin
     public String root(){
         return "Payment routing service";
     }
 
     @GetMapping("/payments/all")
+    @CrossOrigin
     public Flux<Payment> allPayments(){
         return repository.findAll();
     }
 
     @GetMapping("/payments/all/{userId}")
+    @CrossOrigin
     public Flux<Payment> allPaymentsByUserId(@PathVariable String userId){
 //        change the internal structure of this function
 //        to return all documents, with similar user ids.
@@ -32,6 +35,7 @@ public class PaymentService {
     }
 
     @PostMapping("/payment/create")
+    @CrossOrigin
     Mono<Void> createPayment(@RequestBody Payment newPayment){
         Mono<Payment> saveToDatabase = repository.save(newPayment);
         return Mono.when(saveToDatabase);
@@ -39,6 +43,7 @@ public class PaymentService {
 
 //    deleting payment in database by id
     @DeleteMapping("/payment/delete/{paymentId}")
+    @CrossOrigin
     public Mono<Void> deletePaymentRecord(@PathVariable String paymentId){
         return Mono.when(repository.deleteById(paymentId));
     }
